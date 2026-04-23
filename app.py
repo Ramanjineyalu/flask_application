@@ -2,9 +2,13 @@ from flask import Flask, request, jsonify
 import requests
 import os
 import logging
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO)
+
+DATABRICKS_HOST = os.getenv("DATABRICKS_HOST")
+TOKEN = os.getenv("TOKEN")
 
 def get_run_output(run_id):
     url = f"{DATABRICKS_HOST}/api/2.1/jobs/runs/get-output"
