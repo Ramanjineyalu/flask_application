@@ -46,7 +46,7 @@ Provide:
 def health():
     return jsonify({"status": "ok"})
 
-@app.route("/webhook", methods=["POST"])
+@app.route("/webhook", methods=["GET","POST"])
 def webhook():
     payload = request.json
 
