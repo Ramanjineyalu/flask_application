@@ -10,6 +10,14 @@ logging.basicConfig(level=logging.INFO)
 DATABRICKS_HOST = os.getenv("DATABRICKS_HOST")
 TOKEN = os.getenv("TOKEN")
 
+@app.before_request
+def log_request_info():
+    print("---- Incoming Request ----")
+    print("Method:", request.method)
+    print("URL:", request.url)
+    print("Headers:", dict(request.headers))
+    print("Body:", request.get_data(as_text=True))
+    
 def get_run_output(run_id):
     url = f"{DATABRICKS_HOST}/api/2.1/jobs/runs/get-output"
     headers = {"Authorization": f"Bearer {TOKEN}"}
